@@ -5,6 +5,48 @@
  *
 */
 
-.layout-tv body::-webkit-scrollbar {
-    display: none;
+/* Hide scrollbars */
+.layout-tv body::-webkit-scrollbar,
+::-webkit-scrollbar {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
 }
+
+/* 1. Global smooth scrolling for the entire document, pages, and home rows */
+html,
+body,
+.skinBody,
+.mainAnimatedPages,
+.page,
+.pageContainer,
+.itemsContainer,
+.emby-scroller,
+.scrollContainer,
+.smoothScrollY,
+.smoothScrollX,
+.scrollY,
+.scrollX {
+    scroll-behavior: smooth !important;
+    -webkit-overflow-scrolling: touch !important;
+}
+
+/* 2. Netflix-like smooth focus transitions on media cards, posters, and list items */
+.layout-tv .card,
+.layout-tv .cardBox,
+.layout-tv .listItem,
+.layout-tv .listItem-border,
+.layout-tv .navMenuOption {
+    -webkit-transition: -webkit-transform 180ms cubic-bezier(0.2, 0, 0.38, 1), background-color 180ms ease-out !important;
+    transition: transform 180ms cubic-bezier(0.2, 0, 0.38, 1), background-color 180ms ease-out !important;
+}
+
+.layout-tv .navMenuOption:focus,
+.layout-tv .listItem:focus {
+    background-color: rgba(255, 255, 255, 0.12) !important;
+    -webkit-transform: scale(1.02) !important;
+    transform: scale(1.02) !important;
+    border-radius: 6px;
+    outline: none !important;
+}
+
