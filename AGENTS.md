@@ -26,10 +26,9 @@
    - Keep interventions surgical: prefer the 1-2 native flags or CSS properties over tens of lines of custom JS workarounds.
 
 ## Critical Testing & Verification Rules
-1. **Never modify or overwrite the non-dev app on TV:**
-   - Production / user app is `org.jellyfin.webos`. Never install, overwrite, or launch over it.
-   - For dev testing on physical TV, always use the dev app ID: `org.jellyfin.webos.dev`.
-   - Always restore `frontend/appinfo.json` and `services/services.json` to `org.jellyfin.webos` before committing.
+1. **App Identity & Protection:**
+   - This repository is a dedicated dev fork configured as `org.jellyfin.webos.dev` (Title: "Jellyfin Dev").
+   - Keep the dev package identity in `frontend/appinfo.json` and `services/services.json` so builds remain strictly isolated from any production store app on the TV.
 2. **Prioritize Local Verification:**
    - Do NOT run intrusive tests on the TV when local verification is requested.
    - Verify UI changes locally using browser testing or the webOS TV Simulator.
