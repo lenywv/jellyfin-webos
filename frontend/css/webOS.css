@@ -31,21 +31,39 @@ body,
     -webkit-overflow-scrolling: touch !important;
 }
 
-/* 2. Netflix-like smooth focus transitions on media cards, posters, and list items */
+/* 2. Smooth focus transitions on media cards, posters, and navigation items */
 .layout-tv .card,
 .layout-tv .cardBox,
+.layout-tv .cardPadder,
 .layout-tv .listItem,
 .layout-tv .listItem-border,
 .layout-tv .navMenuOption {
-    -webkit-transition: -webkit-transform 180ms cubic-bezier(0.2, 0, 0.38, 1), background-color 180ms ease-out !important;
-    transition: transform 180ms cubic-bezier(0.2, 0, 0.38, 1), background-color 180ms ease-out !important;
+    -webkit-transition: -webkit-transform 180ms cubic-bezier(0.2, 0, 0.25, 1), box-shadow 180ms cubic-bezier(0.2, 0, 0.25, 1), background-color 180ms ease-out !important;
+    transition: transform 180ms cubic-bezier(0.2, 0, 0.25, 1), box-shadow 180ms cubic-bezier(0.2, 0, 0.25, 1), background-color 180ms ease-out !important;
+}
+
+/* Neutralize the thick 13px solid blue border on cardScalable */
+.layout-tv .card:focus .cardBox:not(.visualCardBox) .cardScalable {
+    border-color: transparent !important;
+}
+
+/* Clean, crisp 2.5px cyan focus ring with subtle elevation and soft glow */
+.layout-tv .card:focus {
+    z-index: 20 !important;
+}
+
+.layout-tv .card:focus > .cardBox {
+    -webkit-transform: scale(1.05) translateZ(0) !important;
+    transform: scale(1.05) translateZ(0) !important;
+}
+
+.layout-tv .card:focus .cardPadder {
+    box-shadow: 0 0 0 2.5px #00a4dc, 0 10px 24px rgba(0, 0, 0, 0.75), 0 0 14px rgba(0, 164, 220, 0.4) !important;
 }
 
 .layout-tv .navMenuOption:focus,
 .layout-tv .listItem:focus {
     background-color: rgba(255, 255, 255, 0.12) !important;
-    -webkit-transform: scale(1.02) !important;
-    transform: scale(1.02) !important;
     border-radius: 6px;
     outline: none !important;
 }
