@@ -140,13 +140,4 @@
             postMessage('hideMediaSession');
         }
     };
-
-    // Enable smooth scroll setting in Jellyfin Web localStorage for webOS
-    try {
-        if (window.localStorage && !window.localStorage.getItem('enableSmoothScroll')) {
-            window.localStorage.setItem('enableSmoothScroll', 'true');
-        }
-    } catch (e) {
-        console.warn('Could not set enableSmoothScroll in localStorage', e);
-    }
 })(window.AppInfo, window.DeviceInfo);
