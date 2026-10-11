@@ -16,8 +16,13 @@
    - For UI glitches or styling behaviors, always inspect what CSS and settings Jellyfin Web already provides (e.g. `enableSmoothScroll` in localStorage, `.cardPadder`, `.cardBox`) before inventing new overrides.
 2. **First Check Server / Web Layer for Content and Media Issues:**
    - If images are blurred, missing, or content fails to render, check the Jellyfin server logs, server libraries, and network responses before blaming the webOS client wrapper. Jellyfin uses blurhash placeholders that only resolve when the server successfully serves the primary image.
-3. **Verify Runtime State Directly (Inspect over Guesswork):**
-   - Use DevTools inspection (local browser or simulator) to check computed CSS and actual DOM nodes before assuming what rules apply.
+3. **Verify Runtime State Directly via CDP Before Writing Fixes (Inspect over Guesswork):**
+   - **Do NOT guess and try random blind fixes:** When debugging tricky client behaviors (like scrolling, navigation, or event handling), blind trial-and-error (e.g. adding keydown listeners, monkey-patching native APIs, applying arbitrary timers) creates severe bugs and wastes time.
+   - **Inspect via Chrome DevTools Protocol (CDP) First:** Connect to the inspect target (`ares-inspect` DevTools port or simulator WebSocket) and inspect:
+     - The actual runtime DOM inside `#contentFrame` (`document.getElementById('contentFrame').contentDocument`).
+     - Real active element states (`document.activeElement`), event listeners, and computed styles (`getComputedStyle`).
+     - Console error traces and `localStorage` values.
+   - **Trace the Original Mechanism:** See what Jellyfin Web actually calls during navigation/scrolling by querying running instances or inspecting Jellyfin Web bundles before writing any wrapper code.
    - Keep interventions surgical: prefer the 1-2 native flags or CSS properties over tens of lines of custom JS workarounds.
 
 ## Critical Testing & Verification Rules
